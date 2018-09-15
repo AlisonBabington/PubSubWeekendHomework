@@ -7,6 +7,7 @@ const FilmItem = function (section) {
 FilmItem.prototype.render = function (film) {
   const div = createAndAppend('div', 'film-div', '', this.section);
   const title = createAndAppend('h2', 'filmtitle', film.title, div);
+  title.id = film.id;
   const director = createAndAppend('h3', 'filmdirector', film.director, div);
   const year = createAndAppend('h4', 'filmyear',film.release_date,div);
 };

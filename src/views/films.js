@@ -1,6 +1,7 @@
 const PubSub = require('../helpers/pub_sub.js');
 const createAndAppend = require('../helpers/create_and_append.js');
-const FilmItem = require('./film_item.js')
+const FilmItem = require('./film_item.js');
+const Select = require('./select.js');
 
 const Films = function () {
 };
@@ -19,6 +20,8 @@ Films.prototype.render = function (films) {
     const filmItem = new FilmItem(section);
     filmItem.render(film);
   })
+  const select = new Select(section);
+  select.bindEvents();
 };
 
 module.exports = Films;
