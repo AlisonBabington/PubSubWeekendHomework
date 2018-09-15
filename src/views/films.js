@@ -1,18 +1,24 @@
 const PubSub = require('../helpers/pub_sub.js');
-const create_and_append = require('../helpers/create_and_append.js');
+const createAndAppend = require('../helpers/create_and_append.js');
+const FilmItem = require('./film_item.js')
 
 const Films = function () {
-  this.films = null;
 };
 
 Films.prototype.bindEvents = function () {
   PubSub.subscribe('Ghibli:all_data', (event) => {
-    this.films = event.detail;
+    this.render(event.detail);
   });
+
 };
 
-Films.prototype.render = function () {
-
+Films.prototype.render = function (films) {
+  const section = document.querySelector('section#films-container')
+  const div = createAndAppend('div', null, '', section)
+  films.forEach( (film) => {
+    const filmItem = new FilmItem(section);
+    filmItem.render(film);
+  })
 };
 
 module.exports = Films;
