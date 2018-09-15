@@ -10,7 +10,6 @@ Ghibli.prototype.getData = function (url, channel) {
   const request = new Request(url)
 request.get()
   .then((data) => {
-    console.log(data);
     this.data = data;
     PubSub.publish(channel, this.data);
   })
@@ -20,10 +19,10 @@ request.get()
 };
 
 Ghibli.prototype.filterFilms = function (films, filterType, filterItem) {
-  return films.filter((film) => {
+    const filteredFilms = films.filter((film) => {
      return film[filterType] === filterItem
-  })
-  console.log(films);
+  });
+  PubSub.publish('Ghibli:filteredFilms', filteredFilms);
 };
 
 module.exports = Ghibli;

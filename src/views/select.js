@@ -7,19 +7,20 @@ const Select = function (section) {
   this.films = null;
 };
 
-// Select.prototype.getInfo = function () {
-//   const ghibli = new Ghibli()
-//   ghibli.getData('https://ghibliapi.herokuapp.com/films', 'Ghibli:all_data-select')
-//   PubSub.subscribe('Ghibli:all_data-select', (event) => {
-//     console.log(event);
-//     this.films = event.detail;
-//   })
-// };
+Select.prototype.getInfo = function () {
+  const ghibli = new Ghibli()
+  ghibli.getData('https://ghibliapi.herokuapp.com/films', 'Ghibli:all_data-select')
+  PubSub.subscribe('Ghibli:all_data-select', (event) => {
+    this.films = event.detail;
+  })
+};
 
 Select.prototype.bindEvents = function () {
-  // this.section.removeEventListener('click', (event) => {
-  //   this.handleAddClick(event);
-  // })
+  this.getInfo();
+
+  this.section.removeEventListener('click', (event) => {
+    this.handleAddClick(event);
+  })
   this.section.addEventListener('click', (event) => {
      this.handleAddClick(event);
   });
@@ -29,7 +30,6 @@ Select.prototype.bindEvents = function () {
 Select.prototype.getOneInfo = function (film) {
   const ghibli = new Ghibli();
   ghibli.getData(`https://ghibliapi.herokuapp.com/films/${film.id}`, 'Ghibli:oneFilmdata');
-  console.log(film);
   PubSub.subscribe( 'Ghibli:oneFilmdata', (event) => {
     const thisFilm = event.detail;
     this.section.innerHTML = '';
@@ -61,6 +61,7 @@ Select.prototype.handleAddClick = function (event) {
 
   Select.prototype.getFiltered = function () {
     PubSub.subscribe('Ghibli:filteredFilms', (event) => {
+      console.log(event);
       const filteredFilms = event.detail;
       this.section.innerHTML = '';
       filteredFilms.forEach( film => this.render(film) );
