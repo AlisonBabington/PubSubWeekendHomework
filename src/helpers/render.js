@@ -15,6 +15,8 @@ const renderAll = function (type, element, section) {
     const gender = createAndAppend('h3', 'cGender', `Gender: ${element.gender}`,selectDiv);
     const eyeColor = createAndAppend('h3', 'cEyeColor', `Eye Colour: ${element.eye_color}`, selectDiv);
     const hairColor = createAndAppend('h3', 'cHairColor', `Hair Colour: ${element.hair_color}`, selectDiv);
+    const films = createAndAppend('h3', 'cFilms', `Films`, selectDiv);
+    films.id = element.films;
   }
   else if (type === 'allvehicles') {
     const selectDiv = createAndAppend('div', 'selectView', '', section);

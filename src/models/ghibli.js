@@ -30,7 +30,9 @@ Ghibli.prototype.filterFilms = function (films, filterType, filterItem, section)
   filteredFilms.forEach(item => renderAll('directorFilms', item, section))
 };
 
-
+Ghibli.prototype.findFilms = function (url) {
+  this.getData(url, 'Ghibli:foundFilms')
+};
 
 
 // Ghibli.prototype.filterFilmsArray = function (firstArray, type, specified) {
@@ -45,6 +47,8 @@ Ghibli.prototype.filterFilms = function (films, filterType, filterItem, section)
 Ghibli.prototype.moreData = function (type) {
   this.getData(`https://ghibliapi.herokuapp.com/${type}`, `Ghibli:all${type}`);
 };
+
+
 
 Ghibli.prototype.displayNav = function () {
     let x = document.querySelector("myTopnav");

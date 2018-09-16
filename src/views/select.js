@@ -6,11 +6,11 @@ const Ghibli = require('../models/ghibli.js');
 const Select = function (section) {
   this.section = section;
   this.films = null;
+  this.ghibli = new Ghibli();
 };
 
 Select.prototype.getInfo = function () {
-  const ghibli = new Ghibli()
-  ghibli.getData('https://ghibliapi.herokuapp.com/films', 'Ghibli:all_data-select')
+  this.ghibli.getData('https://ghibliapi.herokuapp.com/films', 'Ghibli:all_data-select')
   PubSub.subscribe('Ghibli:all_data-select', (event) => {
     this.films = event.detail;
   })
@@ -28,8 +28,7 @@ Select.prototype.bindEvents = function () {
 }
 
 Select.prototype.getOneInfo = function (film) {
-  const ghibli = new Ghibli();
-  ghibli.getData(`https://ghibliapi.herokuapp.com/films/${film.id}`, 'Ghibli:oneFilmdata');
+  this.ghibli.getData(`https://ghibliapi.herokuapp.com/films/${film.id}`, 'Ghibli:oneFilmdata');
   PubSub.subscribe( 'Ghibli:oneFilmdata', (event) => {
     const thisFilm = event.detail;
     this.section.innerHTML = '';
@@ -45,17 +44,29 @@ Select.prototype.handleAddClick = function (event) {
   }
   else if (event.target.matches('.filmdirector')) {
     const selectedDirector = event.target.innerHTML;
-    const ghibli = new Ghibli();
-    ghibli.filterFilms(this.films, 'director', selectedDirector, this.section);
+    this.ghibli.filterFilms(this.films, 'director', selectedDirector, this.section);
+    }
+    else if (event.target.matches('.cFilms')) {
+      const filmsUrl = event.target.id;
+      this.ghibli.findFilms(filmsUrl);
+      this.displayCharacterFilms();
+    }
+  };
 
-    };
+  Select.prototype.displayCharacterFilms = function () {
+    PubSub.subscribe('Ghibli:foundFilms', (event) => {
+      this.section.innerHTML = "";
+      renderAll("FilmItem", event.detail, this.section )
+    })
   };
 
 Select.prototype.rendersOtherData = function (section, type) {
   PubSub.subscribe(`Ghibli:all${type}`, (event) => {
       const allArray = event.detail;
       section.innerHTML = '';
-      const showAll = allArray.forEach( item => renderAll(`all${type}`, item, section))
+      const showAll = allArray.forEach( (item) => {
+      return renderAll(`all${type}`, item, section)
+      })
   });
 };
 
