@@ -59,14 +59,12 @@ Select.prototype.handleAddClick = function (event) {
       this.films.forEach( film => renderAll('allFilms', film, this.section))
     }
     else if (event.target.id === "people") {
-      const select = new Select(this.section)
       this.ghibli.moreData("people")
-      select.rendersOtherData(this.section, 'people');
+      this.rendersOtherData(this.section, 'people');
     }
     else if (event.target.id === "vehicles") {
-      const select = new Select(this.section)
       this.ghibli.moreData("vehicles")
-      select.rendersOtherData(this.section, 'vehicles');
+      this.rendersOtherData(this.section, 'vehicles');
     }
   };
 
