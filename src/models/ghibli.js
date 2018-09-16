@@ -34,21 +34,9 @@ Ghibli.prototype.findFilms = function (url) {
   this.getData(url, 'Ghibli:foundFilms')
 };
 
-
-// Ghibli.prototype.filterFilmsArray = function (firstArray, type, specified) {
-//   console.log(specified);
-//   const filteredFilms = firstArray.filter ((element) => {
-//      return element[type].includes(specified)
-//      console.log(filteredFilms);
-//   });
-//   PubSub.publish('Ghibli:filteredFilmsArray', filteredFilms);
-// };
-
 Ghibli.prototype.moreData = function (type) {
   this.getData(`https://ghibliapi.herokuapp.com/${type}`, `Ghibli:all${type}`);
 };
-
-
 
 Ghibli.prototype.displayNav = function () {
     let x = document.querySelector("myTopnav");

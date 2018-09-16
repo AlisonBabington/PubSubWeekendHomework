@@ -2,7 +2,7 @@ const PubSub = require('../helpers/pub_sub.js');
 const createAndAppend = require('../helpers/create_and_append.js');
 const renderAll = require('../helpers/render.js');
 
-const FilmItem = require('./film_item.js');
+// const FilmItem = require('./film_item.js');
 const Select = require('./select.js');
 const Ghibli = require('../models/ghibli.js');
 const NavBar = require('./nav_bar.js');
