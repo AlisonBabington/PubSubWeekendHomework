@@ -4,10 +4,26 @@
     <meta charset="utf-8">
     <title>Studio Ghibli</title>
     <link rel="stylesheet" href="css/main.css">
+    <link href="https://fonts.googleapis.com/css?family=Abril+Fatface|Raleway" rel="stylesheet">
     <script src="js/bundle.js">
     </script>
   </head>
   <body>
+    <div class="topnav" id="myTopnav">
+  <h2 class="active">Home</h2>
+  <div class="dropdown">
+    <button class="dropbtn">Dropdown
+      <i class="fa fa-caret-down"></i>
+    </button>
+    <div class="dropdown-content">
+      <h2 id="people">People</h2>
+      <h2 id="vehicles">Vehicles</h2>
+      <h2 id='species'>Species</h2>
+    </div>
+  </div>
+  <h2 href="#about">About</h2>
+  <h2 href="javascript:void(0);" class="icon" onclick="displayNav()">&#9776;</h2>
+</div>
     <h1>Studio Ghibli:</h1>
     <section id="films-container"></section>
   </body>

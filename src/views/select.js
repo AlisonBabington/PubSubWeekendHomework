@@ -1,4 +1,5 @@
 const createAndAppend = require('../helpers/create_and_append.js');
+const renderAll = require('../helpers/render.js')
 const PubSub = require('../helpers/pub_sub.js');
 const Ghibli = require('../models/ghibli.js');
 
@@ -26,25 +27,17 @@ Select.prototype.bindEvents = function () {
   });
 }
 
-
 Select.prototype.getOneInfo = function (film) {
   const ghibli = new Ghibli();
   ghibli.getData(`https://ghibliapi.herokuapp.com/films/${film.id}`, 'Ghibli:oneFilmdata');
   PubSub.subscribe( 'Ghibli:oneFilmdata', (event) => {
     const thisFilm = event.detail;
     this.section.innerHTML = '';
-    this.render(thisFilm);
+    const render = renderAll('FilmItem', thisFilm, this.section)
     // ghibli.makeRatingChart(thisFilm.rt_score);
   });
 };
 
-Select.prototype.render = function (thisFilm) {
-  const selectDiv = createAndAppend('div', 'selectView', '', this.section);
-  const title = createAndAppend ('h2', 'filmtitle', thisFilm.title, selectDiv);
-  const director = createAndAppend('h3', 'filmdirector', thisFilm.director, selectDiv);
-  const year = createAndAppend('h4', 'filmyear', thisFilm.release_date, selectDiv);
-  const description = createAndAppend('p', 'filmDescription', thisFilm.description, selectDiv);
-};
 
 Select.prototype.handleAddClick = function (event) {
   if (event.target.matches('.filmtitle')) {
@@ -54,41 +47,25 @@ Select.prototype.handleAddClick = function (event) {
   else if (event.target.matches('.filmdirector')) {
     const selectedDirector = event.target.innerHTML;
     const ghibli = new Ghibli();
-    ghibli.filterFilms(this.films, 'director', selectedDirector);
-    this.getFiltered();
+    ghibli.filterFilms(this.films, 'director', selectedDirector, this.section);
+
     };
   };
 
   Select.prototype.getFiltered = function () {
     PubSub.subscribe('Ghibli:filteredFilms', (event) => {
       console.log(event);
-      const filteredFilms = event.detail;
-      this.section.innerHTML = '';
-      filteredFilms.forEach( film => this.render(film) );
+      const filteredinfo = event.detail;
+      filteredinfo.forEach( item => console.log(item) );
   });
+  // renderAll('directorFilms', item, this.section)
 };
 
-// const film = document.querySelectorAll('h2.filmtitle');
-// const director = document.querySelectorAll('h3.filmdirector');
-//
-// film.forEach( (filmtitle) => {
-//   filmtitle.addEventListener('click', (event) => {
-//     const selectedFilm = event.target;
-//     console.log(event.target);
-//     this.getOneInfo(selectedFilm)
-//   });
-// });
-//
-// director.forEach( (director) => {
-//   director.addEventListener('click', (event) => {
-//     const selectedDirector = event.target.innerHTML;
-//     const ghibli = new Ghibli();
-//     ghibli.filterFilms(this.films, 'director', selectedDirector);
-//     PubSub.subscribe('Ghibli:filteredFilms', (event) => {
-//       const filteredFilms = event.detail;
-//       this.section.innerHTML = '';
-//       filteredFilms.forEach( film => this.render(film) );
-//     })
-//   });
-// });
+Select.prototype.renderPeople = function (section) {
+  PubSub.subscribe('Ghibli:allPeople', (event) => {
+      console.log(event);
+  })
+};
+
+
 module.exports = Select;
