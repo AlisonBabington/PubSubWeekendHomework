@@ -18,12 +18,12 @@ Select.prototype.getInfo = function () {
 
 Select.prototype.bindEvents = function () {
   this.getInfo();
-
   this.section.removeEventListener('click', (event) => {
     this.handleAddClick(event);
   })
   this.section.addEventListener('click', (event) => {
      this.handleAddClick(event);
+
   });
 }
 
@@ -53,10 +53,10 @@ Select.prototype.handleAddClick = function (event) {
     }
   };
 
-  Select.prototype.handleNavClick = function (event) {
+  Select.prototype.handleNavClick = function (event, films) {
     if (event.target.innerHTML === 'Home') {
       this.section.innerHTML = "";
-      this.films.forEach( film => renderAll('allFilms', film, this.section))
+      films.forEach( film => renderAll('allFilms', film, this.section))
     }
     else if (event.target.id === "people") {
       this.ghibli.moreData("people")

@@ -12,7 +12,7 @@ NavBar.prototype.navbarlinks = function () {
   const nav = document.querySelector('div#myTopnav')
   nav.addEventListener('click', (event) => {
     const select = new Select(this.section)
-    select.handleNavClick(event)
+    select.handleNavClick(event, this.films);
   })
 
 };
