@@ -38,7 +38,6 @@ Select.prototype.getOneInfo = function (film) {
   });
 };
 
-
 Select.prototype.handleAddClick = function (event) {
   if (event.target.matches('.filmtitle')) {
     const selectedFilm = event.target;
@@ -52,19 +51,12 @@ Select.prototype.handleAddClick = function (event) {
     };
   };
 
-  Select.prototype.getFiltered = function () {
-    PubSub.subscribe('Ghibli:filteredFilms', (event) => {
-      console.log(event);
-      const filteredinfo = event.detail;
-      filteredinfo.forEach( item => console.log(item) );
+Select.prototype.rendersOtherData = function (section, type) {
+  PubSub.subscribe(`Ghibli:all${type}`, (event) => {
+      const allArray = event.detail;
+      section.innerHTML = '';
+      const showAll = allArray.forEach( item => renderAll(`all${type}`, item, section))
   });
-  // renderAll('directorFilms', item, this.section)
-};
-
-Select.prototype.renderPeople = function (section) {
-  PubSub.subscribe('Ghibli:allPeople', (event) => {
-      console.log(event);
-  })
 };
 
 

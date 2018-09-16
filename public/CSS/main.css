@@ -5,7 +5,7 @@ body {
   font-family: 'Raleway', sans-serif;
 }
 
-.film-div {
+.film-div, .selectView {
   background-color: #FFF7F8;
   width: 40%;
   padding: 0.8rem;
