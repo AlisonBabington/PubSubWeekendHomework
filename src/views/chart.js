@@ -1,12 +1,10 @@
-const createAndAppend = require('../helpers/create_and_append.js');
+
 const Highcharts = require('highcharts');
 
 
 const Chart = function (section) {
   this.section = section;
 };
-
-
 
 
 Chart.prototype.render = function (films) {
