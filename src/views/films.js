@@ -44,17 +44,5 @@ Films.prototype.navbarlinks = function () {
   })
 };
 
-Films.prototype.handleNavClick = function (event, section) {
-  if (event.target.innerHTML === 'Home') {
-    this.bindEvents();
-  }
-  else if (event.target.id === "people") {
-    const select = new Select(section)
-    const ghibli = new Ghibli();
-    ghibli.moreData("people")
-    select.renderPeople();
-  }
-};
-
 
 module.exports = Films;

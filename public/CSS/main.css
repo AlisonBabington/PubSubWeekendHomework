@@ -9,6 +9,10 @@ body {
   font-family: 'Raleway', sans-serif;
 }
 
+.highcharts-background {
+  fill: #FFF7F8;
+}
+
 .film-div, .selectView {
   float: left;
   background-color: #FFF7F8;
