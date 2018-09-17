@@ -30,6 +30,7 @@ const renderAll = function (type, element, section) {
     title.id = element.id;
     const director = createAndAppend('h3', 'filmdirector', element.director, div);
     const year = createAndAppend('h4', 'filmyear',element.release_date, div);
+
   }
 };
 

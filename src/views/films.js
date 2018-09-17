@@ -2,7 +2,7 @@ const PubSub = require('../helpers/pub_sub.js');
 const createAndAppend = require('../helpers/create_and_append.js');
 const renderAll = require('../helpers/render.js');
 
-// const FilmItem = require('./film_item.js');
+const Chart = require('./chart.js');
 const Select = require('./select.js');
 const Ghibli = require('../models/ghibli.js');
 const NavBar = require('./nav_bar.js');
@@ -22,6 +22,8 @@ Films.prototype.render = function (films) {
   this.films = films;
   this.section = document.querySelector('section#films-container')
   const div = createAndAppend('div', null, '', this.section)
+  const chart = new Chart (div);
+  chart.render(this.films)
   this.films.forEach( (film) => {
     const render = renderAll('allFilms', film, this.section,)
   })
