@@ -5,6 +5,10 @@ body {
   font-family: 'Raleway', sans-serif;
 }
 
+.highcharts-container {
+  font-family: 'Raleway', sans-serif;
+}
+
 .film-div, .selectView {
   float: left;
   background-color: #FFF7F8;

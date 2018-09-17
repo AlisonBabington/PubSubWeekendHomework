@@ -2,6 +2,7 @@ const createAndAppend = require('../helpers/create_and_append.js');
 const renderAll = require('../helpers/render.js')
 const PubSub = require('../helpers/pub_sub.js');
 const Ghibli = require('../models/ghibli.js');
+const Chart = require('./chart.js')
 
 const Select = function (section) {
   this.section = section;
@@ -56,6 +57,8 @@ Select.prototype.handleAddClick = function (event) {
   Select.prototype.handleNavClick = function (event, films) {
     if (event.target.innerHTML === 'Home') {
       this.section.innerHTML = "";
+      const chart = new Chart (this.section);
+      chart.render(films)
       films.forEach( film => renderAll('allFilms', film, this.section))
     }
     else if (event.target.id === "people") {

@@ -8,6 +8,7 @@ const renderAll = function (type, element, section) {
     const year = createAndAppend('h4', 'filmyear', element.release_date, selectDiv);
     const description = createAndAppend('p', 'filmDescription', element.description, selectDiv);
   }
+
   else if (type === "allpeople") {
     const selectDiv = createAndAppend('div', 'selectView', '', section);
     const name = createAndAppend('h2', 'charactername', element.name, selectDiv);
@@ -18,12 +19,14 @@ const renderAll = function (type, element, section) {
     const films = createAndAppend('h3', 'cFilms', `Films`, selectDiv);
     films.id = element.films;
   }
+
   else if (type === 'allvehicles') {
     const selectDiv = createAndAppend('div', 'selectView', '', section);
     const name = createAndAppend('h2', 'vehiclename', element.name, selectDiv);
     const vehicle_class = createAndAppend('h3', 'vehicleclass', `Vehicle Class: ${element.age}`, selectDiv);
     const description = createAndAppend('h4', 'vehicledesc', `${element.description}`,selectDiv);
   }
+  
   else if (type === "allFilms" || "directorFilms") {
     const div = createAndAppend('div', 'film-div', '', section);
     const title = createAndAppend('h2', 'filmtitle', element.title, div);
