@@ -1,14 +1,10 @@
-
 const Highcharts = require('highcharts');
-
 
 const Chart = function (section) {
   this.section = section;
 };
 
-
 Chart.prototype.render = function (films) {
-
   Highcharts.chart(this.section, {
       chart: {
           type: 'column'
@@ -47,13 +43,8 @@ Chart.prototype.render = function (films) {
       series: [{
           name: 'Rotten Tomatoes Score',
           data: films.map(film => parseInt(film.rt_score))
-
       }]
   });
 };
-
-
-
-
 
 module.exports = Chart;

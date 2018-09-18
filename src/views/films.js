@@ -1,7 +1,6 @@
 const PubSub = require('../helpers/pub_sub.js');
 const createAndAppend = require('../helpers/create_and_append.js');
-const renderAll = require('../helpers/render.js');
-
+const FilmItem = require('./film_item.js');
 const Chart = require('./chart.js');
 const Select = require('./select.js');
 const Ghibli = require('../models/ghibli.js');
@@ -20,28 +19,18 @@ Films.prototype.bindEvents = function () {
 
 Films.prototype.render = function (films) {
   this.films = films;
-  this.section = document.querySelector('section#films-container')
-  const div = createAndAppend('div', null, '', this.section)
+  this.section = document.querySelector('section#films-container');
+  const div = createAndAppend('div', null, '', this.section);
   const chart = new Chart (div);
-  chart.render(this.films)
+  chart.render(this.films);
   this.films.forEach( (film) => {
-    const render = renderAll('allFilms', film, this.section,)
+    const filmItem = new FilmItem(this.section);
+    filmItem.render(film);
   })
   const select = new Select(this.section);
   select.bindEvents();
   const navBar = new NavBar(this.films, this.section);
   navBar.navbarlinks();
-};
-
-Films.prototype.navbarlinks = function () {
-  const nav = document.querySelector('div#myTopnav')
-  nav.addEventListener('click', (event) => {
-    this.handleNavClick(event, this.section)
-  })
-  const dropdown = document.querySelector('div.dropdown-content')
-  dropdown.addEventListener('click', (event) => {
-    this.handleNavClick(event, this.section)
-  })
 };
 
 
